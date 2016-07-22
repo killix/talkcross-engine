@@ -12,11 +12,11 @@
     import Auth from '../api/auth';
 
     export default {
-        
+
         name: 'App',
-        
+
         vuex: {
-            state: {
+            getters: {
                 token: state => state.auth.token
             }
         },
