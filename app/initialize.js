@@ -31,54 +31,54 @@ Vue.use(VueRouter);
 Vue.use(VueResource);
 Vue.use(VueValidator);
 
-// 
+//
 // Enviromnment
-// 
+//
 
 const environment = process.env.NODE_ENV;
 
-// 
+//
 // Configure Vue
 // Here we will configure Vue based on the environment we are running in.
-// 
+//
 
 Vue.config.debug = (environment === 'development');
 Vue.config.devtools = (environment === 'development');
 
-// 
+//
 // Application
 // Here we will create the application instance.
-// 
+//
 
 let application = {
-    store
+  store
 };
 
-// 
+//
 // Router
 // Here we will create the router instance.
-// 
+//
 
 let router = new VueRouter({
-    history: true
+  history: true
 });
 
-// 
+//
 // Router mapping.
 // Here we will tell VueRouter what routes the application will be using.
-// 
+//
 
 router.map(routes);
 
-// 
+//
 // Start the application
 // Finally, we can start the application.
-// 
+//
 
 router.start(application, '#content', function () {
 
-    if (window) {
-        window.App = router.app;
-    }
+  if (window) {
+    window.App = router.app;
+  }
 
 });

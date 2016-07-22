@@ -1,13 +1,28 @@
-'use strict';
-var express = require('express');
-var timeout = require('connect-timeout');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
-var todos = require('./routes/todos');
-var AV = require('leanengine');
+//
+// Copyright (C) 2016 Changzhou TwistSnake Co.,Ltd
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+//
 
-var app = express();
+import express from 'express'
+import timeout from 'connect-timeout'
+import path from 'path'
+import cookieParser from 'cookie-parser'
+import bodyParser from 'body-parser'
+import todos from './routes/todos'
+import AV from 'leanengine'
+
+const app = express();
 
 // 设置模板引擎
 app.set('views', path.join(__dirname, 'views'));
@@ -19,6 +34,7 @@ app.use(timeout('15s'));
 
 // 加载云函数定义
 require('./cloud');
+
 // 加载云引擎中间件
 app.use(AV.express());
 
@@ -33,7 +49,7 @@ app.use(cookieParser());
 // 可以将一类的路由单独保存在一个文件中
 app.use('/todos', todos);
 
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   // 如果任何一个路由都没有返回响应，则抛出一个 404 异常给后续的异常处理器
   if (!res.headersSent) {
     var err = new Error('Not Found');
@@ -43,17 +59,18 @@ app.use(function(req, res, next) {
 });
 
 // error handlers
-app.use(function(err, req, res, next) { // jshint ignore:line
+app.use(function (err, req, res, next) { // jshint ignore:line
   var statusCode = err.status || 500;
-  if(statusCode === 500) {
+  if (statusCode === 500) {
     console.error(err.stack || err);
   }
-  if(req.timedout) {
-    console.error('请求超时: url=%s, timeout=%d, 请确认方法执行耗时很长，或没有正确的 response 回调。', req.originalUrl, err.timeout);
+  if (req.timedout) {
+    console.error('请求超时: url=%s, timeout=%d, 请确认方法执行耗时很长，或没有正确的 response 回调。',
+      req.originalUrl, err.timeout);
   }
   res.status(statusCode);
   // 默认不输出异常详情
-  var error = {}
+  var error = {};
   if (app.get('env') === 'development') {
     // 如果是开发环境，则将异常堆栈输出到页面，方便开发调试
     error = err;

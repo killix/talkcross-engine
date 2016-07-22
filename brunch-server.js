@@ -14,6 +14,34 @@
 // limitations under the License.
 //
 
-module.exports = (port, path, callback) => {
-  return require('./server/server');
+module.exports = (port, publicPath, callback) => {
+
+  process.env.LEANCLOUD_APP_ID = '0x08VitFksfeN3orC1v9Eiif-gzGzoHsz';
+  process.env.LEANCLOUD_APP_KEY = 'TLb63GxWqtXNMWagJpD9QBKS';
+  process.env.LEANCLOUD_APP_MASTER_KEY = 'dXFEfjypF2rYNKYi0qBbcbTh';
+  process.env.LEANCLOUD_APP_ENV = 'development';
+  process.env.LEANCLOUD_APP_PORT = 3000;
+  process.env.LEANCLOUD_APP_INSTANCE = 'staging';
+  process.env.LEANCLOUD_REGION = 'CN';
+
+  var path = require('path');
+  var child_process = require('child_process');
+
+  var server = child_process.spawn(
+    './node_modules/.bin/nodemon',
+    ['./server/index.js'],
+    { cwd: __dirname });
+
+  server.stdout.setEncoding('utf8');
+  callback();
+
+  server.stdout.on('data', function (data) {
+    process.stdout.write(data);
+  });
+
+  server.stderr.on('data', function (data) {
+    process.stdout.write(data);
+  });
+
+  return server;
 };
