@@ -23,17 +23,20 @@
     "brunch"
   ],
   "dependencies": {
+    "leanengine": "^0.4.2",
     "vue": "^1.0.21",
     "vue-resource": "^0.7.0",
     "vue-router": "^0.7.13",
     "vue-validator": "^2.1.1",
-    "vuex": "^0.6.3",
+    "vuex": "^0.6.3"
+  },
+  "devDependencies": {
     "auto-reload-brunch": "^2.7.1",
-    "brunch": "2.7.5",
-    "vue-brunch": "^1.0.0",
     "babel-brunch": "^6.0.4",
     "babel-polyfill": "6.7.4",
-    "babel-preset-es2015": "^6.6.0"
+    "babel-preset-es2015": "^6.6.0",
+    "brunch": "2.7.5",
+    "vue-brunch": "^1.1.2"
   },
   "engines": {
     "node": "4.x"
