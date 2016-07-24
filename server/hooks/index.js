@@ -14,19 +14,16 @@
 // limitations under the License.
 //
 
-module.exports = {
-  files: {
-    javascripts: {
-      joinTo: 'app.js'
-    },
-    templates: {
-      joinTo: 'app.js'
-    }
-  },
-  plugins: {
-    babel: {
-      presets: ['es2015'],
-      compact: false
-    }
-  }
+'use strict';
+
+// Add any common hooks you want to share across services in here.
+//
+// Below is an example of how a hook is written and exported. Please
+// see http://docs.feathersjs.com/hooks/readme.html for more details
+// on hooks.
+
+exports.myHook = function (options) {
+  return function (hook) {
+    console.log('My custom global hook ran. Feathers is awesome!');
+  };
 };

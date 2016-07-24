@@ -14,19 +14,19 @@
 // limitations under the License.
 //
 
-module.exports = {
-  files: {
-    javascripts: {
-      joinTo: 'app.js'
-    },
-    templates: {
-      joinTo: 'app.js'
-    }
-  },
-  plugins: {
-    babel: {
-      presets: ['es2015'],
-      compact: false
-    }
-  }
+const handler = require('feathers-errors/handler');
+const notFound = require('./not-found-handler');
+const logger = require('./logger');
+const leanengine = require('./leanengine');
+
+module.exports = function () {
+  // Add your custom middleware here. Remember, that
+  // just like Express the order matters, so error
+  // handling middleware should go last.
+  const app = this;
+
+  app.use(leanengine(app));
+  app.use(notFound());
+  app.use(logger(app));
+  app.use(handler());
 };

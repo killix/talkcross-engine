@@ -14,19 +14,12 @@
 // limitations under the License.
 //
 
-module.exports = {
-  files: {
-    javascripts: {
-      joinTo: 'app.js'
-    },
-    templates: {
-      joinTo: 'app.js'
-    }
-  },
-  plugins: {
-    babel: {
-      presets: ['es2015'],
-      compact: false
-    }
-  }
+'use strict';
+
+const errors = require('feathers-errors');
+
+module.exports = function () {
+  return function (req, res, next) {
+    next(new errors.NotFound('Page not found'));
+  };
 };

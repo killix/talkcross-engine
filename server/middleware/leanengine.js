@@ -14,19 +14,20 @@
 // limitations under the License.
 //
 
-module.exports = {
-  files: {
-    javascripts: {
-      joinTo: 'app.js'
-    },
-    templates: {
-      joinTo: 'app.js'
-    }
-  },
-  plugins: {
-    babel: {
-      presets: ['es2015'],
-      compact: false
-    }
-  }
+const AV = require('leanengine');
+
+module.exports = function (app) {
+
+  AV.init({
+    appId: process.env.LEANCLOUD_APP_ID,
+    appKey: process.env.LEANCLOUD_APP_KEY,
+    masterKey: process.env.LEANCLOUD_APP_MASTER_KEY
+  });
+
+  // 如果不希望使用 masterKey 权限，可以将下面一行删除
+  AV.Cloud.useMasterKey();
+
+  app.AV = AV;
+
+  return AV.express();
 };

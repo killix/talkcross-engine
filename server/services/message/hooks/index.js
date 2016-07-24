@@ -14,19 +14,25 @@
 // limitations under the License.
 //
 
-module.exports = {
-  files: {
-    javascripts: {
-      joinTo: 'app.js'
-    },
-    templates: {
-      joinTo: 'app.js'
-    }
-  },
-  plugins: {
-    babel: {
-      presets: ['es2015'],
-      compact: false
-    }
-  }
+const globalHooks = require('../../../hooks');
+const hooks = require('feathers-hooks');
+
+exports.before = {
+  all: [],
+  find: [],
+  get: [],
+  create: [],
+  update: [],
+  patch: [],
+  remove: []
+};
+
+exports.after = {
+  all: [],
+  find: [],
+  get: [],
+  create: [],
+  update: [],
+  patch: [],
+  remove: []
 };

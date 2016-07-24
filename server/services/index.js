@@ -14,19 +14,20 @@
 // limitations under the License.
 //
 
-module.exports = {
-  files: {
-    javascripts: {
-      joinTo: 'app.js'
-    },
-    templates: {
-      joinTo: 'app.js'
-    }
-  },
-  plugins: {
-    babel: {
-      presets: ['es2015'],
-      compact: false
-    }
-  }
+'use strict';
+
+const leanstorage = require('./leanstorage');
+
+const message = require('./message');
+// const authentication = require('./authentication');
+// const user = require('./user');
+
+module.exports = function () {
+  const app = this;
+
+  app.service('leanstorage', leanstorage);
+
+  // app.configure(authentication);
+  // app.configure(user);
+  app.configure(message);
 };

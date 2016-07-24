@@ -15,18 +15,14 @@
 //
 
 module.exports = {
-  files: {
-    javascripts: {
-      joinTo: 'app.js'
+  "host": "localhost",
+  "port": 3030,
+  "nedb": "../data/",
+  "public": "../public/",
+  "auth": {
+    "token": {
+      "secret": "YnvwILNeIOgsv3QaRw+YSFu6C+XVsozJyixS80JAgSEVrX6ECm9WfMIalp0NS8SNhtsSUC78rxr7uvp94C4fXw=="
     },
-    templates: {
-      joinTo: 'app.js'
-    }
-  },
-  plugins: {
-    babel: {
-      presets: ['es2015'],
-      compact: false
-    }
+    "local": {}
   }
 };

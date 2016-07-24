@@ -15,18 +15,14 @@
 //
 
 module.exports = {
-  files: {
-    javascripts: {
-      joinTo: 'app.js'
+  "host": "feathers-chat-app.feathersjs.com",
+  "port": 80,
+  "nedb": "NEDB_BASE_PATH",
+  "public": "../public/",
+  "auth": {
+    "token": {
+      "secret": "FEATHERS_AUTH_SECRET"
     },
-    templates: {
-      joinTo: 'app.js'
-    }
-  },
-  plugins: {
-    babel: {
-      presets: ['es2015'],
-      compact: false
-    }
+    "local": {}
   }
 };
